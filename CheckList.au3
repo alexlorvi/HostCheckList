@@ -8,8 +8,6 @@
 $aTmp = _PathSplit(@ScriptFullPath,"", "", "", "")
 $sINIFile = @ScriptDir & "\" & $aTmp[$PATH_FILENAME] & ".ini"
 
-Check("89.184.82.91:80",300)
-
 if FileExists($sINIFile) Then
    $aINISections = IniReadSectionNames($sINIFile)
    if IsArray($aINISections) Then
