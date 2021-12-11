@@ -26,6 +26,7 @@ if FileExists($sINIFile) Then
 			$sIcoFail = "shell32.dll"
 			$sIcoFail = ""
 			$iTime = 400
+			$MouseMoveClose=0
 			if $iGlobalSection>0 Then
 			   $aGlobal = IniReadSection($sINIFile,"Global")
 			   if IsArray($aGlobal) Then
@@ -35,6 +36,7 @@ if FileExists($sINIFile) Then
 					 if StringLower($aGlobal[$i][0])=StringLower("Border") Then $iBorder = Int($aGlobal[$i][1])
 					 if StringLower($aGlobal[$i][0])=StringLower("TextSize") Then $iTextSize = Int($aGlobal[$i][1])
 					 if StringLower($aGlobal[$i][0])=StringLower("Timeout") Then $iTime = Int($aGlobal[$i][1])
+					 if StringLower($aGlobal[$i][0])=StringLower("MouseMoveClose") Then $MouseMoveClose = Int($aGlobal[$i][1])
 					 if StringLower($aGlobal[$i][0])=StringLower("IconOk") Then
 						if IsString($aGlobal[$i][1]) Then
 						   if StringInStr($aGlobal[$i][1],",")>0 Then
@@ -104,6 +106,8 @@ if FileExists($sINIFile) Then
 			   Switch GUIGetMsg()
 				  Case $GUI_EVENT_CLOSE
 					 ExitLoop
+				  case $GUI_EVENT_MOUSEMOVE
+					 if $MouseMoveClose=1 Then ExitLoop
  			   EndSwitch
 			WEnd
 		    GUIDelete()
